@@ -12,6 +12,8 @@
 		</ItemActionComponent>
 	</Base>
 
+	<Base file="mods/tome_magic/files/entities/misc/base_card_page/card.xml"></Base>
+
 	<InheritTransformComponent
 		_tags="enabled_in_world,enabled_in_hand" >
 	</InheritTransformComponent>
@@ -22,10 +24,10 @@
 		execute_every_n_frame="1" >
 	</LuaComponent>
 
-	<LuaComponent
+	<!--<LuaComponent
 		_tags="enabled_in_hand"
 		script_kick="mods/tome_magic/files/entities/misc/card_tome_magic/kick.lua"
-	></LuaComponent>
+	></LuaComponent>-->
 
 	<VariableStorageComponent
 		_tags="enabled_in_hand,cooldown_frame"

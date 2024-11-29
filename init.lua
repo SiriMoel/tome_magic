@@ -5,9 +5,11 @@ if not ModIsEnabled("souls") then
     return
 end
 
-dofile_once("mods/souls/files/scripts/souls.lua")
-
 ModLuaFileAppend( "data/scripts/gun/gun_actions.lua", "mods/tome_magic/files/actions.lua" )
+
+ModLuaFileAppend("mods/souls/files/scripts/souls.lua", "mods/tome_magic/files/scripts/souls_append.lua")
+
+dofile_once("mods/souls/files/scripts/souls.lua")
 
 local nxml = dofile_once("mods/tome_magic/lib/nxml.lua")
 
@@ -79,18 +81,16 @@ for i,v in ipairs(dropdoers) do
     ModTextFileSetContent(v.path, tostring(xml))
 end
 
-ModLuaFileAppend("mods/souls/files/scripts/souls.lua", "mods/tome_magic/files/scripts/souls_append.lua")
-
 --translations
 local translations = ModTextFileGetContent( "data/translations/common.csv" );
 if translations ~= nil then
     while translations:find("\r\n\r\n") do
         translations = translations:gsub("\r\n\r\n","\r\n")
     end
-    local new_translations = ModTextFileGetContent( table.concat({"mods/souls/files/translations.csv"}) )
+    local new_translations = ModTextFileGetContent( table.concat({"mods/tome_magic/files/translations.csv"}) )
     translations = translations .. new_translations
     ModTextFileSetContent( "data/translations/common.csv", translations )
-end 
+end
 
 function OnPlayerSpawned(player)
     dofile_once("mods/tome_magic/files/gui.lua")

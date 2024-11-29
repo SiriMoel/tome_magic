@@ -11,11 +11,17 @@ local cooldown_frames = 6
 local cooldown_frame = ComponentGetValue2(comp_cd, "value_int")
 local frame = GameGetFrameNum()
 
-if not frame >= cooldown_frame then return end
+if frame < cooldown_frame then return end
 
 local current_active_soul_group = TomeMagicGetActiveSoulGroup()
 
-current_active_soul_group = current_active_soul_group + 1
+if current_active_soul_group >= 3 then
+    current_active_soul_group = 1
+else
+    current_active_soul_group = current_active_soul_group + 1
+end
+
+GamePrint(tostring(current_active_soul_group)) -- TESTING
 
 TomeMagicSetActiveSoulGroup(current_active_soul_group, true)
 

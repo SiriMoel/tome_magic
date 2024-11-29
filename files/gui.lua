@@ -21,7 +21,7 @@ function GuiRender()
     GuiStartFrame(gui)
 
     local player = GetPlayer()
-    local x, y = EntityGetTransform(x, y)
+    local x, y = EntityGetTransform(player)
     
     if EntityHasTag(HeldItem(player), "soul_tome") and active_soul_group == 3 then
         GuiText(gui, 50, 50, "TELE COST: " .. TomeMagicGetTeleSoulCost(x, y)) -- pos not final ofc

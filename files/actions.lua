@@ -3,12 +3,12 @@ dofile_once("mods/souls/files/scripts/souls.lua")
 
 local actions_to_insert = {
     {
-		id          = "TOME_SHOT", -- infinite bombs
-		name 		= "$action_moldos_tome_shot",
-		description = "$actiondesc_moldos_tome_shot",
-		sprite 		= "mods/souls/files/spell_icons/tome_shot.png",
+		id          = "TOME_MAGIC", -- infinite bombs
+		name 		= "$action_moldos_tome_magic",
+		description = "$actiondesc_moldos_tome_magic",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_magic.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
-		related_projectiles	= {"mods/souls/files/entities/projectiles/tome_seek/proj.xml"},
+		related_projectiles	= {"mods/souls/files/entities/projectiles/tome_bomb/proj.xml"},
 		type 		= ACTION_TYPE_PROJECTILE,
 		inject_after = "SUMMON_WANDGHOST",
 		spawn_level                       = "",
@@ -17,7 +17,7 @@ local actions_to_insert = {
 		spawn_probability_table = {},
 		price = 100,
 		mana = 50,
-		custom_xml_file="mods/souls/files/entities/misc/card_tome_magic/card.xml",
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_magic/card.xml",
 		action 		= function()
 			dofile_once("mods/souls/files/scripts/souls.lua")
 
@@ -41,7 +41,18 @@ local actions_to_insert = {
                 
             end
             if active_soul_group == 3 then
-                
+				local x, y = EntityGetTransform(entity)
+				local dest_x, dest_y = TomeMagicGetTeleCoords()
+				local cost = TomeMagicGetTeleSoulCost(x, y)
+				local current_active_soul_group = TomeMagicGetActiveSoulGroup()
+				local soulscount = GetTotalSoulsOfGroup(current_active_soul_group)
+				if soulscount >= cost then
+					EntitySetTransform(entity, dest_x, dest_y)
+					GamePrint("Teleported!")
+					RemoveSoulsFromGroup(3, cost)
+				else
+					GamePrint("You do not have enough souls for this.")
+				end
             end
 		end,
 	},

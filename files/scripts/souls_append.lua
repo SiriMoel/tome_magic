@@ -8,8 +8,6 @@ soul_groups = {
 
 soul_group_names = { "Volatile", "Lesser", "Special" }
 
-GamePrint("tome magic souls_append.lua ran!")
-
 function GetSoulFromGroup(group)
     local upto = 1
     for i=1,#soul_groups[group] do
@@ -28,6 +26,12 @@ function RemoveSoulFromGroup(group)
     local soul = GetSoulFromGroup(group)
     if soul ~= "" then
         RemoveSoul(soul)
+    end
+end
+
+function RemoveSoulsFromGroup(group, count)
+    for i=1,count do
+        RemoveSoulFromGroup(group)
     end
 end
 
@@ -72,14 +76,14 @@ function TomeMagicGetTeleCoords()
 end
 
 function TomeMagicSetTeleCoords(x, y)
-    GlobalsSetValue("tome_magic_tele_x", tostring(x))
-    GlobalsSetValue("tome_magic_tele_y", tostring(y))
+    GlobalsSetValue("tome_magic_tele_x", tostring(math.floor(x + 0.5)))
+    GlobalsSetValue("tome_magic_tele_y", tostring(math.floor(y + 0.5)))
 end
 
 function TomeMagicGetTeleSoulCost(x, y)
     local cost = 0
     local dest_x, dest_y = TomeMagicGetTeleCoords()
     local dist = DistanceBetween(x, y, dest_x, dest_y)
-    cost = math.ceil(dist / 250)
+    cost = math.ceil(dist / 250) + 5
     return cost
 end
