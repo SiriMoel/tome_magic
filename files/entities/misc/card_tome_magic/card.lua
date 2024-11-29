@@ -19,7 +19,6 @@ if ComponentGetValue2(comp_controls, "mButtonDownKick") == true and frame >= coo
         current_active_soul_group = current_active_soul_group + 1
     end
     cooldown_frames = 12
-    GamePrint(tostring(current_active_soul_group)) -- TESTING
     TomeMagicSetActiveSoulGroup(current_active_soul_group, true)
     ComponentSetValue2( comp_cd, "value_int", frame + cooldown_frames )
 end
