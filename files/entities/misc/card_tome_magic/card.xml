@@ -1,18 +1,15 @@
 <Entity>
 	
-	<Base file="data/entities/base_custom_card.xml" > 
-		<SpriteComponent 
-			image_file="mods/tome_magic/files/spell_icons/tome_magic.png"
-			>
-		</SpriteComponent>
-		
-		<ItemActionComponent 
-			_tags="enabled_in_world"
-			action_id="MOLDOS_TOME_MAGIC" >
-		</ItemActionComponent>
-	</Base>
+	<Base file="mods/tome_magic/files/entities/misc/base_card_page/card.xml" > </Base>
 
-	<Base file="mods/tome_magic/files/entities/misc/base_card_page/card.xml"></Base>
+	<SpriteComponent 
+		image_file="mods/tome_magic/files/spell_icons/tome_magic.png" >
+	</SpriteComponent>
+		
+	<ItemActionComponent 
+		_tags="enabled_in_world"
+		action_id="MOLDOS_TOME_MAGIC" >
+	</ItemActionComponent>
 
 	<InheritTransformComponent
 		_tags="enabled_in_world,enabled_in_hand" >

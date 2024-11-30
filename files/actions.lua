@@ -35,17 +35,27 @@ local actions_to_insert = {
             if wand ~= tome then return end
 
             if active_soul_group == 1 then
-                
+				
             end
             if active_soul_group == 2 then
-                
+				local soulscount = GetTotalSoulsOfGroup(active_soul_group)
+				if soulscount >= 3 then
+					RemoveSoulsFromGroup(active_soul_group, 3)
+					c.spread_degrees = c.spread_degrees + 5
+					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
+					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
+					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
+					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
+					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
+				else
+					GamePrint("You do not have enough souls for this.")
+				end
             end
             if active_soul_group == 3 then
+				local soulscount = GetTotalSoulsOfGroup(active_soul_group)
 				local x, y = EntityGetTransform(entity)
 				local dest_x, dest_y = TomeMagicGetTeleCoords()
 				local cost = TomeMagicGetTeleSoulCost(x, y)
-				local current_active_soul_group = TomeMagicGetActiveSoulGroup()
-				local soulscount = GetTotalSoulsOfGroup(current_active_soul_group)
 				if soulscount >= cost then
 					EntitySetTransform(entity, dest_x, dest_y)
 					GamePrint("Teleported!")

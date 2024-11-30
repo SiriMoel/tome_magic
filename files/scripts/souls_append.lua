@@ -11,15 +11,11 @@ soul_group_names = { "Volatile", "Lesser", "Special" }
 function GetSoulFromGroup(group)
     local upto = 1
     for i=1,#soul_groups[group] do
-        while upto < 4 do
-            if GetSoulsCount(soul_groups[group][upto]) > 0 then
-                return soul_groups[group][upto]
-            else
-                upto = upto + 1
-            end
+        if GetSoulsCount(soul_groups[group][i]) > 0 then
+            return soul_groups[group][i]
         end
-        return ""
     end
+    return ""
 end
 
 function RemoveSoulFromGroup(group)
