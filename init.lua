@@ -81,6 +81,25 @@ for i,v in ipairs(dropdoers) do
     ModTextFileSetContent(v.path, tostring(xml))
 end
 
+-- page icon generation
+local pages = { "tiny", "dragon", "pyramid", "squidward", "leviathan", "spirit", "ghost", "grandmaster", "alchemist", "robot", "meat" }
+for i,page in ipairs(pages) do
+    local base_id, base_w, base_h = ModImageMakeEditable("mods/tome_magic/files/spell_icons/page.png", 16, 16)
+    local page_id, page_w, page_h = ModImageMakeEditable("mods/tome_magic/files/spell_icons/tome_page_" .. page .. ".png", 16, 16)
+    if page_id ~= nil then
+        for k=1,16 do
+            for n=1,16 do
+                local pixel = ModImageGetPixel(page_id, k, n)
+                if pixel ~= nil then
+                    if pixel == 0 then
+                        ModImageSetPixel(page_id, k, n, ModImageGetPixel(base_id, k, n))
+                    end
+                end
+            end
+        end
+    end
+end
+
 --translations
 local translations = ModTextFileGetContent( "data/translations/common.csv" );
 if translations ~= nil then

@@ -3,7 +3,7 @@ dofile_once("mods/souls/files/scripts/souls.lua")
 
 local actions_to_insert = {
     {
-		id          = "TOME_MAGIC", -- infinite bombs
+		id          = "TOME_MAGIC",
 		name 		= "$action_moldos_tome_magic",
 		description = "$actiondesc_moldos_tome_magic",
 		sprite 		= "mods/tome_magic/files/spell_icons/tome_magic.png",
@@ -20,9 +20,7 @@ local actions_to_insert = {
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_magic/card.xml",
 		action 		= function()
 			dofile_once("mods/souls/files/scripts/souls.lua")
-
 			if reflecting then return end
-
             local entity = GetUpdatedEntityID()
 			local active_soul_group = TomeMagicGetActiveSoulGroup()
             local tome = EntityGetWithTag("soul_tome")[1]
@@ -31,9 +29,7 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-
-            if wand ~= tome then return end
-
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
             if active_soul_group == 1 then
 				
             end
@@ -64,6 +60,38 @@ local actions_to_insert = {
 					GamePrint("You do not have enough souls for this.")
 				end
             end
+		end,
+	},
+	{
+		id          = "TOME_PAGE_TINY",
+		name 		= "$action_moldos_tome_page_tiny",
+		description = "$actiondesc_moldos_tome_page_tiny",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_tiny.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = 50,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_tiny/card.xml",
+		action 		= function()
+			--dofile_once("mods/souls/files/scripts/souls.lua")
+			if reflecting then return end
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			local x, y = EntityGetTransform(entity)
+			local amount = 0.05 * (math.log(math.max(-y, 0), 1.0001))
+			c.damage_projectile_add = c.damage_projectile_add + amount
+			GamePrint(tostring(amount)) -- TESTING
 		end,
 	},
 }
