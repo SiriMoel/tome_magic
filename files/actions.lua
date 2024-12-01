@@ -78,7 +78,7 @@ local actions_to_insert = {
 		mana = 50,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_tiny/card.xml",
 		action 		= function()
-			--dofile_once("mods/souls/files/scripts/souls.lua")
+			draw_actions(1, true)
 			if reflecting then return end
 			local entity = GetUpdatedEntityID()
 			local tome = EntityGetWithTag("soul_tome")[1]
@@ -89,9 +89,44 @@ local actions_to_insert = {
             end
             if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
 			local x, y = EntityGetTransform(entity)
-			local amount = 0.05 * (math.log(math.max(-y, 0), 1.0001))
-			c.damage_projectile_add = c.damage_projectile_add + amount
-			GamePrint(tostring(amount)) -- TESTING
+			if y > 0 then
+				local amount = 0.1 * (y / 1000)
+				c.damage_projectile_add = c.damage_projectile_add + amount
+			end
+		end,
+	},
+	{
+		id          = "TOME_PAGE_PYRAMID",
+		name 		= "$action_moldos_tome_page_pyramid",
+		description = "$actiondesc_moldos_tome_page_pyramid",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_pyramid.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = 50,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_pyramid/card.xml",
+		action 		= function()
+			draw_actions(1, true)
+			if reflecting then return end
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			local x, y = EntityGetTransform(entity)
+			if y < 0 then
+				local amount = 0.1 * (-y / 1000)
+				amount = amount * (1 + GameGetGameEffectCount(entity, "TRIP"))
+				c.damage_projectile_add = c.damage_projectile_add + amount
+			end
 		end,
 	},
 }
