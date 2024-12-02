@@ -14,7 +14,11 @@ local player = GetPlayer()
 if ComponentGetValue2(comp_controls, "mButtonDownRightClick") == true then
     if HeldItem(root) ~= tome or root ~= player then return end
     if frame >= cooldown_frame then
-        EntitySetTransform(player, 3836, 7518)
+        if ModIsEnabled("Apotheosis") then
+            EntitySetTransform(player, 4863, 9091)
+        else
+            EntitySetTransform(player, 3836, 7518)
+        end
         ComponentSetValue2( comp_cd, "value_int", frame + cooldown_frames )
         GamePrint("Teleported!")
     else

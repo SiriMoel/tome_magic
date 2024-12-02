@@ -41,10 +41,10 @@ local actions_to_insert = {
 				end
             end
             if active_soul_group == 2 then
-				if soulscount >= 3 then
-					RemoveSoulsFromGroup(active_soul_group, 3)
+				local soulscount = GetTotalSoulsOfGroup(active_soul_group)
+				if soulscount >= 1 then
+					RemoveSoulsFromGroup(active_soul_group, 1)
 					c.spread_degrees = c.spread_degrees + 5
-					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
@@ -154,6 +154,14 @@ local actions_to_insert = {
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_ghost/card.xml",
 		action 		= function()
 			draw_actions(1, true)
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
 		end,
 	},
 	{
@@ -172,7 +180,15 @@ local actions_to_insert = {
 		mana = 70,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_dragon/card.xml",
 		action 		= function( recursion_level, iteration )
-			c.fire_rate_wait = c.fire_rate_wait + 30
+			c.fire_rate_wait = c.fire_rate_wait + 10
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
 			local firerate = c.fire_rate_wait
 			local reload = current_reload_time
 			local mana_ = mana
@@ -181,7 +197,6 @@ local actions_to_insert = {
 					local rec = check_recursion(data, recursion_level)
 					if data ~= nil and data.type == 2  and rec > -1 then
 						dont_draw_actions = true
-						GamePrint(data.id) -- TESTING
 						data.action(rec)
 						dont_draw_actions = false
 					end
@@ -192,7 +207,6 @@ local actions_to_insert = {
 					local rec = check_recursion(data, recursion_level)
 					if data ~= nil and data.type == 2  and rec > -1 then
 						dont_draw_actions = true
-						GamePrint(data.id) -- TESTING
 						data.action(rec)
 						dont_draw_actions = false
 					end
@@ -221,6 +235,14 @@ local actions_to_insert = {
 		mana = 20,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_squidward/card.xml",
 		action = function()
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
 			c.extra_entities = c.extra_entities .. "mods/tome_magic/files/entities/misc/hitfx_tome_page_squidward/hitfx.xml"
 			draw_actions( 1, true )
 		end,
@@ -241,6 +263,14 @@ local actions_to_insert = {
 		mana = 10,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_robot/card.xml",
 		action 		= function()
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
 			draw_actions(1, true)
 		end,
 	},
@@ -260,6 +290,14 @@ local actions_to_insert = {
 		mana = 10,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_alchemist/card.xml",
 		action = function()
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
 			add_projectile("data/entities/projectiles/deck/material_water.xml")
 			c.game_effect_entities = c.game_effect_entities .. "data/entities/misc/effect_apply_wet.xml,"
 			add_projectile("data/entities/projectiles/deck/material_oil.xml")
@@ -285,6 +323,96 @@ local actions_to_insert = {
 		mana = -1,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_leviathan/card.xml",
 		action 		= function()
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id          = "TOME_PAGE_SPIRIT",
+		name 		= "$action_moldos_tome_page_spirit",
+		description = "$actiondesc_moldos_tome_page_spirit",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_spirit.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = 200,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_spirit/card.xml",
+		action = function()
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			add_projectile("mods/tome_magic/files/entities/projectiles/tome_page_spirit/proj.xml")
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id          = "TOME_PAGE_MEAT",
+		name 		= "$action_moldos_tome_page_meat",
+		description = "$actiondesc_moldos_tome_page_meat",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_meat.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_PASSIVE,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = 100,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_meat/card.xml",
+		action 		= function()
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id          = "TOME_PAGE_GRANDMASTER",
+		name 		= "$action_moldos_tome_page_grandmaster",
+		description = "$actiondesc_moldos_tome_page_grandmaster",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_grandmaster.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_PASSIVE,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = 100,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_grandmaster/card.xml",
+		action 		= function()
+			local entity = GetUpdatedEntityID()
+			local tome = EntityGetWithTag("soul_tome")[1]
+			local wand = 0
+			local comp_inv = EntityGetFirstComponentIncludingDisabled(entity, "Inventory2Component")
+			if comp_inv then
+				wand = ComponentGetValue2(comp_inv, "mActiveItem")
+            end
+            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
 			draw_actions(1, true)
 		end,
 	},

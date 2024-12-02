@@ -1,0 +1,50 @@
+<Entity tags="souls_tome_page">
+	
+	<Base file="mods/tome_magic/files/entities/misc/base_card_page/card.xml" > </Base>
+
+	<SpriteComponent 
+		image_file="mods/tome_magic/files/spell_icons/tome_page_meat.png" >
+	</SpriteComponent>
+		
+	<ItemActionComponent 
+		_tags="enabled_in_world"
+		action_id="MOLDOS_TOME_PAGE_MEAT" >
+	</ItemActionComponent>
+
+	<InheritTransformComponent
+		_tags="enabled_in_world,enabled_in_hand" >
+	</InheritTransformComponent>
+
+	<MagicConvertMaterialComponent
+		_tags="enabled_in_hand"
+		kill_when_finished="0"
+		from_material_array="meat_slime_cursed,rotten_meat,meat_cursed,meat_cursed_dry,meat_frog,meat_slime,meat_slime_green,meat_warm,meat_hot,meat,meat_done,meat_helpless,meat_worm,meat_cursed,meat_teleport,meat_fast,meat_polymorph,meat_confusion,graham_hellblood,meat_polymorph_protection"
+		steps_per_frame="5"
+		to_material_array="tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid"
+		clean_stains="0"
+		is_circle="1"
+		radius="64" 
+		loop="1"
+		>
+	</MagicConvertMaterialComponent>
+
+	<MagicConvertMaterialComponent
+		_tags="enabled_in_hand"
+		kill_when_finished="1"
+		from_material_array="meat_slime_cursed,rotten_meat,meat_cursed,meat_cursed_dry,meat_frog,meat_slime,meat_slime_green,meat_warm,meat_hot,meat,meat_done,meat_helpless,meat_worm,meat_cursed,meat_teleport,meat_fast,meat_polymorph,meat_confusion,graham_hellblood,meat_polymorph_protection"
+		steps_per_frame="4"
+		to_material_array="tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid,tome_magic_meat_liquid"
+		clean_stains="0"
+		is_circle="1"
+		radius="64" 
+		loop="1"
+		>
+	</MagicConvertMaterialComponent>
+
+	<!--<LuaComponent
+		_tags="enabled_in_hand"
+		script_source_file="mods/tome_magic/files/entities/misc/card_tome_page_meat/card.lua"
+		execute_every_n_frame="10"
+	></LuaComponent>-->
+
+</Entity>

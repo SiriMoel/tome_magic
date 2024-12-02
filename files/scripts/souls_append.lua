@@ -86,6 +86,6 @@ end
 
 function GetTomePageCountOnTome(tome)
     local targets = EntityGetAllChildren(tome, "souls_tome_page")
-    GamePrint("tome page count: " .. tostring(#targets)) -- TESTING
+    --GamePrint("tome page count: " .. tostring(#targets)) -- TESTING
     return #targets
 end

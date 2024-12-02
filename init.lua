@@ -5,11 +5,14 @@ if not ModIsEnabled("souls") then
     return
 end
 
-ModLuaFileAppend( "data/scripts/gun/gun_actions.lua", "mods/tome_magic/files/actions.lua" )
+dofile_once("mods/tome_magic/files/scripts/utils.lua")
 
 ModLuaFileAppend("mods/souls/files/scripts/souls.lua", "mods/tome_magic/files/scripts/souls_append.lua")
-
 dofile_once("mods/souls/files/scripts/souls.lua")
+
+ModLuaFileAppend( "data/scripts/gun/gun_actions.lua", "mods/tome_magic/files/actions.lua" )
+
+ModMaterialsFileAdd("mods/tome_magic/files/materials.xml")
 
 local nxml = dofile_once("mods/tome_magic/lib/nxml.lua")
 
@@ -153,6 +156,8 @@ function OnPlayerSpawned(player)
 
     TomeMagicSetActiveSoulGroup(2, false)
     TomeMagicSetTeleCoords(px, py)
+
+    --for i=1,1000 do AddSouls(soul_types[math.random(1,#soul_types)], 1) end
 
     EntityAddComponent2(player, "LuaComponent", {
         script_death="mods/tome_magic/files/scripts/player_death.lua"

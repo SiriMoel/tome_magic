@@ -1,0 +1,18 @@
+<Entity tags="souls_tome_page">
+	
+	<Base file="mods/tome_magic/files/entities/misc/base_card_page/card.xml" > </Base>
+
+	<SpriteComponent 
+		image_file="mods/tome_magic/files/spell_icons/tome_page_grandmaster.png" >
+	</SpriteComponent>
+		
+	<ItemActionComponent 
+		_tags="enabled_in_world"
+		action_id="MOLDOS_TOME_PAGE_GRANDMASTER" >
+	</ItemActionComponent>
+
+	<InheritTransformComponent
+		_tags="enabled_in_world,enabled_in_hand" >
+	</InheritTransformComponent>
+
+</Entity>
