@@ -7,6 +7,7 @@ function ReturnSouls()
         ModSettingSet("tome_magic.twilight_page_" .. soul .. "_soul_count", 0)
     end
     GamePrint("Souls returned!")
+    EntityKill(GetUpdatedEntityID())
 end
 
 function interacting()
