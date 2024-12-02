@@ -48,7 +48,11 @@ local actions_to_insert = {
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
-					for i=1,GetTomePageCountOnTome(tome) do
+					local pagecount = GetTomePageCountOnTome(tome)
+					if pagecount >= 11 then
+						add_projectile("mods/tome_magic/files/entities/projectiles/all_pages/proj.xml")
+					end
+					for i=1,pagecount do
 						add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
 					end
 				else

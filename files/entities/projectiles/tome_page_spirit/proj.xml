@@ -90,7 +90,7 @@
   
   <AudioComponent
       file="data/audio/Desktop/projectiles.bank"
-      event_root="player_projectiles/all_seeing_eye">
+      event_root="player_projectiles/bullet_heavy_fast">
   </AudioComponent>
 
 </Entity>

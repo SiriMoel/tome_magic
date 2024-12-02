@@ -5,7 +5,7 @@ Ensure this mod loads after Souls.
 
 An expansion for Souls, expanding on the Soul Tome's usage and power.
 Adds the spell [b]Tome Magic[/b], which can be found with the tome.
-Where can you find the tome? [spoiler]In the tree.[/spoiler]
+Where can you find the tome? [spoiler]In the tree. There's a sign to guide you.[/spoiler]
 
 (image with tome magic spell icon)
 
@@ -23,7 +23,7 @@ Ability III - Teleport to set location [b]OR[/b] Set location
 [img]https://i.imgur.com/z1SIIJF.png[/img]
 
 This mod also adds [b]11[/b] tome page spells, which are used to augment the tome.
-How do you find them? [spoiler]As drops from bosses.[/spoiler]
+How do you find the pages? [spoiler]As drops from bosses.[/spoiler]
 
 (image containing each of the tome page icons)
 

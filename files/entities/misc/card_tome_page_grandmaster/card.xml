@@ -15,4 +15,10 @@
 		_tags="enabled_in_world,enabled_in_hand" >
 	</InheritTransformComponent>
 
+	<LuaComponent
+		_tags="enabled_in_hand"
+		script_source_file="mods/tome_magic/files/entities/misc/card_tome_page_grandmaster/orbs.lua"
+		execute_every_n_frame="1"
+	></LuaComponent>
+
 </Entity>
