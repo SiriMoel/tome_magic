@@ -6,7 +6,7 @@ soul_groups = {
     { "fungus", "mage", "ghost", "gilded" },
 }
 
-soul_group_names = { "Volatile", "Lesser", "Special" }
+soul_group_names = { "Rising", "Lesser", "Special" }
 
 function GetSoulFromGroup(group)
     local upto = 1
@@ -41,7 +41,7 @@ end
 
 function GetSoulGroupName(group, includesouls)
     local string = ""
-    string = soul_group_names[group]
+    string = soul_group_names[group] .. " souls"
     if includesouls then
         string = string .. " ("
         for i=1,#soul_groups[group] do
@@ -82,4 +82,10 @@ function TomeMagicGetTeleSoulCost(x, y)
     local dist = DistanceBetween(x, y, dest_x, dest_y)
     cost = math.ceil(dist / 250) + 5
     return cost
+end
+
+function GetTomePageCountOnTome(tome)
+    local targets = EntityGetAllChildren(tome, "souls_tome_page")
+    GamePrint("tome page count: " .. tostring(#targets)) -- TESTING
+    return #targets
 end

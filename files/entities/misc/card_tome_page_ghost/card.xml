@@ -1,14 +1,14 @@
-<Entity tags="souls_tome_page">
+<Entity tags="souls_tome_page,tome_magic_ghost_page">
 	
 	<Base file="mods/tome_magic/files/entities/misc/base_card_page/card.xml" > </Base>
 
 	<SpriteComponent 
-		image_file="mods/tome_magic/files/spell_icons/tome_page_pyramid.png" >
+		image_file="mods/tome_magic/files/spell_icons/tome_page_ghost.png" >
 	</SpriteComponent>
 		
 	<ItemActionComponent 
 		_tags="enabled_in_world"
-		action_id="MOLDOS_TOME_PAGE_PYRAMID" >
+		action_id="MOLDOS_TOME_PAGE_GHOST" >
 	</ItemActionComponent>
 
 	<InheritTransformComponent

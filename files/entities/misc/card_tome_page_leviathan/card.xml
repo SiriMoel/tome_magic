@@ -1,0 +1,31 @@
+<Entity tags="souls_tome_page">
+	
+	<Base file="mods/tome_magic/files/entities/misc/base_card_page/card.xml" > </Base>
+
+	<SpriteComponent 
+		image_file="mods/tome_magic/files/spell_icons/tome_page_leviathan.png" >
+	</SpriteComponent>
+		
+	<ItemActionComponent 
+		_tags="enabled_in_world"
+		action_id="MOLDOS_TOME_PAGE_LEVIATHAN" >
+	</ItemActionComponent>
+
+	<InheritTransformComponent
+		_tags="enabled_in_world,enabled_in_hand" >
+	</InheritTransformComponent>
+
+	<LuaComponent 
+		_tags="enabled_in_hand"
+		script_source_file="mods/tome_magic/files/entities/misc/card_tome_page_leviathan/card.lua"
+		execute_every_n_frame="1" >
+	</LuaComponent>
+
+	<VariableStorageComponent
+		_tags="enabled_in_hand,cooldown_frame"
+        name="cooldown_frame"
+        value_int="0"
+        >
+    </VariableStorageComponent>
+
+</Entity>

@@ -30,6 +30,13 @@ if ComponentGetValue2(comp_controls, "mButtonDownRightClick") == true and frame 
     local soulscount = GetTotalSoulsOfGroup(current_active_soul_group)
     if current_active_soul_group == 1 then
         cooldown_frames = 20
+        if soulscount >= 1 then
+            local entity = EntityLoad("mods/tome_magic/files/entities/misc/effect_tome_magic_dos/effect.xml", x, y)
+            EntityAddChild(player, entity)
+            RemoveSoulsFromGroup(1, 1)
+        else
+            GamePrint("You do not have enough souls for this.")
+        end
     end
     if current_active_soul_group == 2 then
         if soulscount >= 3 then

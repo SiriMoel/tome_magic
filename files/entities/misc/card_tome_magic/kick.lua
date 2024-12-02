@@ -21,7 +21,7 @@ else
     current_active_soul_group = current_active_soul_group + 1
 end
 
-GamePrint(tostring(current_active_soul_group)) -- TESTING
+--GamePrint(tostring(current_active_soul_group)) -- TESTING
 
 TomeMagicSetActiveSoulGroup(current_active_soul_group, true)
 

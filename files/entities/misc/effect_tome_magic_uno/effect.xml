@@ -1,0 +1,12 @@
+<Entity>
+	
+	<InheritTransformComponent>
+    </InheritTransformComponent>	
+    
+	<GameEffectComponent
+        effect="BERSERK"
+        frames="180"
+    >
+	</GameEffectComponent>
+
+</Entity>

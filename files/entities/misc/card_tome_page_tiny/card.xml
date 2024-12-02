@@ -1,4 +1,4 @@
-<Entity>
+<Entity tags="souls_tome_page">
 	
 	<Base file="mods/tome_magic/files/entities/misc/base_card_page/card.xml" > </Base>
 

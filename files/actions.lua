@@ -9,7 +9,7 @@ local actions_to_insert = {
 		sprite 		= "mods/tome_magic/files/spell_icons/tome_magic.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
 		related_projectiles	= {"mods/souls/files/entities/projectiles/tome_bomb/proj.xml"},
-		type 		= ACTION_TYPE_PROJECTILE,
+		type 		= ACTION_TYPE_OTHER,
 		inject_after = "SUMMON_WANDGHOST",
 		spawn_level                       = "",
 		spawn_probability                 = "",
@@ -31,10 +31,16 @@ local actions_to_insert = {
             end
             if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
             if active_soul_group == 1 then
-				
+				local soulscount = GetTotalSoulsOfGroup(active_soul_group)
+				if soulscount >= 1 then
+					local effect = EntityLoad("mods/tome_magic/files/entities/misc/effect_tome_magic_uno/effect.xml", x, y)
+					EntityAddChild(player, effect)
+					RemoveSoulsFromGroup(1, 1)
+				else
+					GamePrint("You do not have enough souls for this.")
+				end
             end
             if active_soul_group == 2 then
-				local soulscount = GetTotalSoulsOfGroup(active_soul_group)
 				if soulscount >= 3 then
 					RemoveSoulsFromGroup(active_soul_group, 3)
 					c.spread_degrees = c.spread_degrees + 5
@@ -42,7 +48,9 @@ local actions_to_insert = {
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
-					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
+					for i=1,GetTomePageCountOnTome(tome) do
+						add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
+					end
 				else
 					GamePrint("You do not have enough souls for this.")
 				end
@@ -75,7 +83,7 @@ local actions_to_insert = {
 		spawn_level_table = {},
 		spawn_probability_table = {},
 		price = 100,
-		mana = 50,
+		mana = 40,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_tiny/card.xml",
 		action 		= function()
 			draw_actions(1, true)
@@ -108,7 +116,7 @@ local actions_to_insert = {
 		spawn_level_table = {},
 		spawn_probability_table = {},
 		price = 100,
-		mana = 50,
+		mana = 40,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_pyramid/card.xml",
 		action 		= function()
 			draw_actions(1, true)
@@ -127,6 +135,157 @@ local actions_to_insert = {
 				amount = amount * (1 + GameGetGameEffectCount(entity, "TRIP"))
 				c.damage_projectile_add = c.damage_projectile_add + amount
 			end
+		end,
+	},
+	{
+		id          = "TOME_PAGE_GHOST",
+		name 		= "$action_moldos_tome_page_ghost",
+		description = "$actiondesc_moldos_tome_page_ghost",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_ghost.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_PASSIVE,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = -1,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_ghost/card.xml",
+		action 		= function()
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id          = "TOME_PAGE_DRAGON",
+		name 		= "$action_moldos_tome_page_dragon",
+		description = "$actiondesc_moldos_tome_page_dragon",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_dragon.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = 70,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_dragon/card.xml",
+		action 		= function( recursion_level, iteration )
+			c.fire_rate_wait = c.fire_rate_wait + 30
+			local firerate = c.fire_rate_wait
+			local reload = current_reload_time
+			local mana_ = mana
+			if discarded ~= nil then
+				for i,data in ipairs(discarded) do
+					local rec = check_recursion(data, recursion_level)
+					if data ~= nil and data.type == 2  and rec > -1 then
+						dont_draw_actions = true
+						GamePrint(data.id) -- TESTING
+						data.action(rec)
+						dont_draw_actions = false
+					end
+				end
+			end
+			if hand ~= nil then
+				for i,data in ipairs(hand) do
+					local rec = check_recursion(data, recursion_level)
+					if data ~= nil and data.type == 2  and rec > -1 then
+						dont_draw_actions = true
+						GamePrint(data.id) -- TESTING
+						data.action(rec)
+						dont_draw_actions = false
+					end
+				end
+			end
+			c.fire_rate_wait = firerate
+			current_reload_time = reload
+			mana = mana_
+
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "TOME_PAGE_SQUIDWARD",
+		name 		= "$action_moldos_tome_page_squidward",
+		description = "$actiondesc_moldos_tome_page_squidward",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_squidward.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = 20,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_squidward/card.xml",
+		action = function()
+			c.extra_entities = c.extra_entities .. "mods/tome_magic/files/entities/misc/hitfx_tome_page_squidward/hitfx.xml"
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "TOME_PAGE_ROBOT",
+		name 		= "$action_moldos_tome_page_robot",
+		description = "$actiondesc_moldos_tome_page_robot",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_robot.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_PASSIVE,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = 10,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_robot/card.xml",
+		action 		= function()
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id          = "TOME_PAGE_ALCHEMIST",
+		name 		= "$action_moldos_tome_page_alchemist",
+		description = "$actiondesc_moldos_tome_page_alchemist",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_alchemist.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = 10,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_alchemist/card.xml",
+		action = function()
+			add_projectile("data/entities/projectiles/deck/material_water.xml")
+			c.game_effect_entities = c.game_effect_entities .. "data/entities/misc/effect_apply_wet.xml,"
+			add_projectile("data/entities/projectiles/deck/material_oil.xml")
+			c.game_effect_entities = c.game_effect_entities .. "data/entities/misc/effect_apply_oiled.xml,"
+			add_projectile("data/entities/projectiles/deck/material_blood.xml")
+			c.game_effect_entities = c.game_effect_entities .. "data/entities/misc/effect_apply_bloody.xml,"
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "TOME_PAGE_LEVIATHAN",
+		name 		= "$action_moldos_tome_page_leviathan",
+		description = "$actiondesc_moldos_tome_page_leviathan",
+		sprite 		= "mods/tome_magic/files/spell_icons/tome_page_leviathan.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/light_bullet_unidentified.png",
+		type 		= ACTION_TYPE_PASSIVE,
+		inject_after = "SUMMON_WANDGHOST",
+		spawn_level                       = "",
+		spawn_probability                 = "",
+		spawn_level_table = {},
+		spawn_probability_table = {},
+		price = 100,
+		mana = -1,
+		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_leviathan/card.xml",
+		action 		= function()
+			draw_actions(1, true)
 		end,
 	},
 }

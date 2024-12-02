@@ -1,0 +1,29 @@
+<Entity tags="tome_magic_squidward_curse">
+
+    <LuaComponent
+		script_source_file="data/scripts/projectiles/curse.lua"
+		execute_every_n_frame="30"
+		>
+	</LuaComponent>
+	
+	<VariableStorageComponent
+		_tags="effect_curse_damage"
+		name="effect_curse_damage"
+		value_float="0.08"
+		>
+	</VariableStorageComponent>
+	
+	<LuaComponent
+		script_source_file="data/scripts/projectiles/curse_end.lua"
+		execute_every_n_frame="-1"
+		execute_on_removed="1"
+		>
+	</LuaComponent>
+	
+	<LifetimeComponent
+		_tags="effect_curse_lifetime"
+		lifetime="300"
+		>
+	</LifetimeComponent>
+
+</Entity>

@@ -1,0 +1,9 @@
+<Entity>
+
+	<LuaComponent
+		script_source_file="mods/tome_magic/files/entities/misc/hitfx_tome_page_squidward/curse_init.lua"
+		execute_every_n_frame="1"
+		>
+	</LuaComponent>
+
+</Entity>
