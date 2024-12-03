@@ -32,10 +32,11 @@ local actions_to_insert = {
             if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
             if active_soul_group == 1 then
 				local soulscount = GetTotalSoulsOfGroup(active_soul_group)
-				if soulscount >= 1 then
+				if soulscount >= 3 then
 					local effect = EntityLoad("mods/tome_magic/files/entities/misc/effect_tome_magic_uno/effect.xml", x, y)
-					EntityAddChild(player, effect)
-					RemoveSoulsFromGroup(1, 1)
+					EntityAddChild(GetPlayer(), effect)
+					GamePrint("Buffed!")
+					RemoveSoulsFromGroup(1, 3)
 				else
 					GamePrint("You do not have enough souls for this.")
 				end
@@ -49,8 +50,17 @@ local actions_to_insert = {
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
 					add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
 					local pagecount = GetTomePageCountOnTome(tome)
+					--GamePrint(tostring(pagecount))
 					if pagecount >= 11 then
-						add_projectile("mods/tome_magic/files/entities/projectiles/all_pages/proj.xml")
+						--add_projectile("mods/tome_magic/files/entities/projectiles/all_pages/proj.xml")
+						c.damage_projectile_add = c.damage_projectile_add + 2
+						--GameRemoveFlagRun("tome_magic_all_pages")
+						if not GameHasFlagRun("tome_magic_all_pages") then
+							local x, y = EntityGetTransform(tome)
+							GamePlaySound( "data/audio/Desktop/event_cues.bank", "event_cues/potion/destroy", x, y )
+							GamePrintImportant("THE TOME HUMS...", "It is finally complete.", "mods/tome_magic/files/souls_decoration.png")
+							GameAddFlagRun("tome_magic_all_pages")
+						end
 					end
 					for i=1,pagecount do
 						add_projectile("mods/tome_magic/files/entities/projectiles/tome_magic_sniper_shot/projectile.xml")
@@ -135,8 +145,8 @@ local actions_to_insert = {
             if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
 			local x, y = EntityGetTransform(entity)
 			if y < 0 then
-				local amount = 0.1 * (-y / 1000)
-				amount = amount * (1 + GameGetGameEffectCount(entity, "TRIP"))
+				local amount = 0.1 * ((y * -1) / 1000)
+				--amount = amount * (1 + GameGetGameEffectCount(entity, "TRIP"))
 				c.damage_projectile_add = c.damage_projectile_add + amount
 			end
 		end,
@@ -158,6 +168,7 @@ local actions_to_insert = {
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_ghost/card.xml",
 		action 		= function()
 			draw_actions(1, true)
+			if reflecting then return end
 			local entity = GetUpdatedEntityID()
 			local tome = EntityGetWithTag("soul_tome")[1]
 			local wand = 0
@@ -184,7 +195,7 @@ local actions_to_insert = {
 		mana = 70,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_dragon/card.xml",
 		action 		= function( recursion_level, iteration )
-			c.fire_rate_wait = c.fire_rate_wait + 10
+			if reflecting then return end
 			local entity = GetUpdatedEntityID()
 			local tome = EntityGetWithTag("soul_tome")[1]
 			local wand = 0
@@ -193,33 +204,7 @@ local actions_to_insert = {
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
             if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
-			local firerate = c.fire_rate_wait
-			local reload = current_reload_time
-			local mana_ = mana
-			if discarded ~= nil then
-				for i,data in ipairs(discarded) do
-					local rec = check_recursion(data, recursion_level)
-					if data ~= nil and data.type == 2  and rec > -1 then
-						dont_draw_actions = true
-						data.action(rec)
-						dont_draw_actions = false
-					end
-				end
-			end
-			if hand ~= nil then
-				for i,data in ipairs(hand) do
-					local rec = check_recursion(data, recursion_level)
-					if data ~= nil and data.type == 2  and rec > -1 then
-						dont_draw_actions = true
-						data.action(rec)
-						dont_draw_actions = false
-					end
-				end
-			end
-			c.fire_rate_wait = firerate
-			current_reload_time = reload
-			mana = mana_
-
+			c.extra_entities = c.extra_entities .. "mods/tome_magic/files/entities/misc/card_tome_page_dragon/reaping_shot.xml,"
 			draw_actions( 1, true )
 		end,
 	},
@@ -239,6 +224,7 @@ local actions_to_insert = {
 		mana = 20,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_squidward/card.xml",
 		action = function()
+			if reflecting then return end
 			local entity = GetUpdatedEntityID()
 			local tome = EntityGetWithTag("soul_tome")[1]
 			local wand = 0
@@ -247,7 +233,7 @@ local actions_to_insert = {
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
             if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
-			c.extra_entities = c.extra_entities .. "mods/tome_magic/files/entities/misc/hitfx_tome_page_squidward/hitfx.xml"
+			c.extra_entities = c.extra_entities .. "mods/tome_magic/files/entities/misc/hitfx_tome_page_squidward/hitfx.xml,"
 			draw_actions( 1, true )
 		end,
 	},
@@ -267,6 +253,7 @@ local actions_to_insert = {
 		mana = 10,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_robot/card.xml",
 		action 		= function()
+			if reflecting then return end
 			local entity = GetUpdatedEntityID()
 			local tome = EntityGetWithTag("soul_tome")[1]
 			local wand = 0
@@ -294,6 +281,7 @@ local actions_to_insert = {
 		mana = 10,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_alchemist/card.xml",
 		action = function()
+			if reflecting then return end
 			local entity = GetUpdatedEntityID()
 			local tome = EntityGetWithTag("soul_tome")[1]
 			local wand = 0
@@ -327,6 +315,7 @@ local actions_to_insert = {
 		mana = -1,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_leviathan/card.xml",
 		action 		= function()
+			if reflecting then return end
 			local entity = GetUpdatedEntityID()
 			local tome = EntityGetWithTag("soul_tome")[1]
 			local wand = 0
@@ -354,6 +343,7 @@ local actions_to_insert = {
 		mana = 200,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_spirit/card.xml",
 		action = function()
+			if reflecting then return end
 			local entity = GetUpdatedEntityID()
 			local tome = EntityGetWithTag("soul_tome")[1]
 			local wand = 0
@@ -382,6 +372,7 @@ local actions_to_insert = {
 		mana = 100,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_meat/card.xml",
 		action 		= function()
+			if reflecting then return end
 			local entity = GetUpdatedEntityID()
 			local tome = EntityGetWithTag("soul_tome")[1]
 			local wand = 0
@@ -409,6 +400,7 @@ local actions_to_insert = {
 		mana = 100,
 		custom_xml_file="mods/tome_magic/files/entities/misc/card_tome_page_grandmaster/card.xml",
 		action 		= function()
+			if reflecting then return end
 			local entity = GetUpdatedEntityID()
 			local tome = EntityGetWithTag("soul_tome")[1]
 			local wand = 0

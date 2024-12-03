@@ -7,9 +7,8 @@ local player = GetPlayer()
 
 local targets = EntityGetInRadiusWithTag( x, y, 12, "projectile" )
 
-
 for i,target in ipairs(targets) do
-    local comp = EntityGetFirstComponent( v, "ProjectileComponent" )
+    local comp = EntityGetFirstComponent( target, "ProjectileComponent" )
     local proj_id
 			
     if comp ~= nil then
@@ -19,9 +18,7 @@ for i,target in ipairs(targets) do
             proj_id = target
         end
 
-        if proj_id ~= nil then
-            EntityLoad("data/entities/particles/poof_red_tiny.xml", x, y)
-            EntityKill(proj_id)
-        end
+        EntityLoad("data/entities/particles/poof_red_tiny.xml", x, y)
+        EntityKill(proj_id)
     end
 end

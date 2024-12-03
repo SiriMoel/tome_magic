@@ -38,7 +38,7 @@ for _,id in pairs(EntityGetInRadiusWithTag( pos_x, pos_y, range, "wand")) do
 end
 
 local range_dos = 1000
-local indicator_distance_dos = 40
+local indicator_distance_dos = 24
 
 -- ping nearby wand
 for _,id in pairs(EntityGetInRadiusWithTag( pos_x, pos_y, range, "tome_magic_twilight_page_thing")) do

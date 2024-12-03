@@ -1,13 +1,13 @@
 This mod requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3313573016]Souls[/url] to run.
 Ensure this mod loads after Souls.
 
-(image with mod title)
+[img]https://i.imgur.com/QBFhf6T.png[/img]
 
 An expansion for Souls, expanding on the Soul Tome's usage and power.
 Adds the spell [b]Tome Magic[/b], which can be found with the tome.
 Where can you find the tome? [spoiler]In the tree. There's a sign to guide you.[/spoiler]
 
-(image with tome magic spell icon)
+[img]https://i.imgur.com/cYBfplw.png[/img]
 
 The main spell of this mod: [b]Tome Magic[/b]
 Found with the Soul Tome.
@@ -15,7 +15,7 @@ Found with the Soul Tome.
 Consumes souls from 1 of 3 soul groups, cycled by kicking while holding the tome with the spell on it.
 Left click to cast the primary function, right click to cast the secondary function.
 
-(image with table containing information about what the abiltiies)
+[img]https://i.imgur.com/fhssRdB.png[/img]
 Ability I - Gain a damage buff [b]OR[/b] Gain a movement buff
 Ability II - Fire a flurry of projectiles [b]OR[/b] Launch bomb
 Ability III - Teleport to set location [b]OR[/b] Set location
@@ -25,7 +25,7 @@ Ability III - Teleport to set location [b]OR[/b] Set location
 This mod also adds [b]11[/b] tome page spells, which are used to augment the tome.
 How do you find the pages? [spoiler]As drops from bosses.[/spoiler]
 
-(image containing each of the tome page icons)
+[img]https://i.imgur.com/Hv9TLX6.png[/img]
 
 Discord: https://discord.gg/FKaRA9HMUq
 Github: https://github.com/SiriMoel/tome_magic

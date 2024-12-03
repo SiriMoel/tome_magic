@@ -16,7 +16,7 @@
 		aabb_min_y="-5" >
 	</HitboxComponent>-->
 
-    <ParticleEmitterComponent 
+    <!--<ParticleEmitterComponent 
 		emitted_material_name="slime"
 		gravity.y="100.0"
 		lifetime_min="0.8"
@@ -35,7 +35,7 @@
 		emission_interval_max_frames="1"
 		emit_cosmetic_particles="1"
 		is_emitting="1" >
-	</ParticleEmitterComponent>
+	</ParticleEmitterComponent>-->
 
     <LifetimeComponent
         lifetime="2"

@@ -6,7 +6,7 @@ function ReturnSouls()
         AddSouls(soul, ModSettingGet("tome_magic.twilight_page_" .. soul .. "_soul_count"))
         ModSettingSet("tome_magic.twilight_page_" .. soul .. "_soul_count", 0)
     end
-    GamePrint("Souls returned!")
+    GamePrintImportant("YOUR SOULS HAVE BEEN RETURNED", "", "mods/tome_magic/files/souls_decoration.png")
     EntityKill(GetUpdatedEntityID())
 end
 
