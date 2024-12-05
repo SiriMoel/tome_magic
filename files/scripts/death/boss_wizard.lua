@@ -6,6 +6,6 @@ function death( damage_type_bit_field, damage_message, entity_thats_responsible,
 	local x, y = EntityGetTransform(entity)
 	if not GameHasFlagRun("tome_magic_wizard_dead") then
 		GameAddFlagRun("tome_magic_wizard_dead")
-		CreateItemActionEntity("MOLDOS_TOME_PAGE_WIZARD", x, y)
+		CreateItemActionEntity("MOLDOS_TOME_PAGE_GRANDMASTER", x, y)
 	end
 end
