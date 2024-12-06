@@ -40,6 +40,10 @@ local dropdoers = {
         script = "mods/tome_magic/files/scripts/death/boss_limbs.lua",
     },
     {
+        path = "data/entities/animals/boss_pit/boss_pit.xml",
+        script = "mods/tome_magic/files/scripts/death/boss_pit.lua",
+    },
+    {
         path = "data/entities/animals/boss_dragon.xml",
         script = "mods/tome_magic/files/scripts/death/boss_dragon.lua",
     },
