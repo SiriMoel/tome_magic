@@ -2,7 +2,7 @@
 
 	<ParticleEmitterComponent 
 		_tags="enabled_in_world"
-		emitted_material_name="soul_particles"
+		emitted_material_name="souls_soul_particles"
 		y_pos_offset_min="-6"
 		y_pos_offset_max="-6"
 		gravity.y="0.0"

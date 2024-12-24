@@ -118,26 +118,6 @@ function HeldItem(player)
     return held_item
 end
 
-function GetMaterialIngestionEffect(material) -- i have no idea what im doing so ofc this doesnt work yet
-    local effects = {}
-    local nxml = dofile_once("mods/pharmacokinetics/lib/nxml.lua")
-    local materials = ModTextFileGetContent("data/materials.xml")
-    local xml = nxml.parse(materials)
-    for element in xml:each_child() do
-        if element.attr.name == "material" then
-            for child in element:each_of("StatusEffects") do
-                for childdos in child:each_of("Ingestion") do
-                    for childtres in childdos:eachof("StatusEffect") do
-                        local effect = childtres.tostring(childtres, true)
-                        GamePrint(effect)
-                        print(effect)
-                    end
-                end
-            end
-        end
-    end
-end
-
 function IncreaseFlightLeft(player, amount)
     local comp = EntityGetFirstComponent( player, "CharacterDataComponent" )
     if comp ~= nil then
