@@ -3,7 +3,7 @@ dofile_once("mods/tome_magic/files/scripts/utils.lua")
 soul_groups = {
     { "bat", "fly", "worm", "spider" },
     { "zombie", "orcs", "slimes", "friendly" },
-    { "fungus", "mage", "ghost", "gilded" },
+    { "fungus", "mage", "ghost", "souls_void" },
 }
 
 soul_group_names = { "Rising", "Lesser", "Special" }
