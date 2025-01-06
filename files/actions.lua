@@ -29,7 +29,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+            if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_MAGIC" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
             if active_soul_group == 1 then
 				local soulscount = GetTotalSoulsOfGroup(active_soul_group)
 				if soulscount >= 3 then
@@ -109,7 +117,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_TINY" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 			local x, y = EntityGetTransform(entity)
 			if y > 0 then
 				local amount = 0.1 * (y / 1000)
@@ -142,7 +158,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_PYRAMID" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 			local x, y = EntityGetTransform(entity)
 			if y < 0 then
 				local amount = 0.1 * ((y * -1) / 1000)
@@ -176,7 +200,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_GHOST" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 		end,
 	},
 	{
@@ -203,7 +235,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_DRAGON" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 			c.extra_entities = c.extra_entities .. "mods/tome_magic/files/entities/misc/card_tome_page_dragon/reaping_shot.xml,"
 			draw_actions( 1, true )
 		end,
@@ -232,7 +272,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_SQUIDWARD" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 			c.extra_entities = c.extra_entities .. "mods/tome_magic/files/entities/misc/hitfx_tome_page_squidward/hitfx.xml,"
 			draw_actions( 1, true )
 		end,
@@ -261,7 +309,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_ROBOT" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 			draw_actions(1, true)
 		end,
 	},
@@ -289,7 +345,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_ALCHEMIST" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 			add_projectile("data/entities/projectiles/deck/material_water.xml")
 			c.game_effect_entities = c.game_effect_entities .. "data/entities/misc/effect_apply_wet.xml,"
 			add_projectile("data/entities/projectiles/deck/material_oil.xml")
@@ -323,7 +387,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_LEVIATHAN" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 			draw_actions(1, true)
 		end,
 	},
@@ -351,7 +423,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_SPIRIT" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 			add_projectile("mods/tome_magic/files/entities/projectiles/tome_page_spirit/proj.xml")
 			draw_actions(1, true)
 		end,
@@ -380,7 +460,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_MEAT" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 			draw_actions(1, true)
 		end,
 	},
@@ -408,7 +496,15 @@ local actions_to_insert = {
 			if comp_inv then
 				wand = ComponentGetValue2(comp_inv, "mActiveItem")
             end
-            if wand ~= tome then GamePrint("This spell must be casted on the tome.") return end
+			if wand ~= tome then
+				GamePrint("This spell must be casted on the tome.")
+				local data = hand[#hand]
+				if ( #hand > 0 ) and ( data ~= nil ) and ( data.id == "MOLDOS_TOME_PAGE_GRANDMASTER" ) then
+					table.insert( discarded, data )
+					table.remove( hand, #hand )
+				end
+				return
+			end
 			draw_actions(1, true)
 		end,
 	},
